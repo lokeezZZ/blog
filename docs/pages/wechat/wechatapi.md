@@ -1,5 +1,21 @@
 # 微信 Api 踩坑之路
 
+## 微信授跳转
+
+关于授权步骤和一些参数说明可以看下[微信官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)，写的很清楚了;
+
+**这里需要注意的是：**
+
+`hash` 模式下，微信授权回调后，将会在 `pathname` 后以及`hash`前添加`code`等参数，例如:`https://a.com/web/?code={code}#/html/page?query={query}`。包括微信分享时配置的`link`也一样。
+
+因此，在`hash`模式下，`react`通过 `constructor`中的`props.location.query`将获取不到`code`。`history`无需担心此问题。
+
+`示例代码`
+
+``` js
+const {code} = props.location.query; // code:undefined
+```
+
 ## JSSDK使用步骤
 1. 绑定域名
 
@@ -13,8 +29,8 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js" ></script>
 // UMD 方式
 import wx from 'weixin-js-sdk';
-
 ```
+
 3. `ready` 之后操作`SDK`
 - `ready` 是异步，使用` promise `更佳；
 - 没有在`ready`状态下调用`api`会提示无权限；
@@ -28,6 +44,8 @@ import wx from 'weixin-js-sdk';
 -  `appId`需一致；
 - 参数大小写是否正确；
 - 在`wx.config`完成后再操作URL重定向；
+
+**以上都没问题就是后端问题**
 
 `代码示例`
 
@@ -116,17 +134,19 @@ export function wxPay(param){
 }
 ```
 ## 分享
+
 **注意事项**
+- 先看一遍官方文档，这里只有官方文档没有提及的事项；
 - `onMenuShareTimeline` `onMenuShareAppMessage` `onMenuShareQQ` `onMenuShareQZone`，这四个接口已准备废弃，最好不要用；
-- `imgUrl`参数是必填的，为空必定失败；
-- 所以新接口不再取页面首张图片作为分享小图标；
-- 配置是异步的，可多次进行配置分享数据，最好是提前配置
+- 新接口不再取页面首张图片作为分享小图标；
+- 图片大小限制为`300*300`， 格式`jpg`；
+- 配置是异步的，可多次进行配置分享数据，最好是提前配置；
 
 **分享失败的解决方案**
 - 确认`wx.config`已经成功
 - 确认`wx.config`时，参数`jsApiList`里`updateTimelineShareData` 和`updateAppMessageShareData`的传入；
-- html的静态页面在前端通过ajax将url传到后台签名，前端需要用js获取当前页面除去'#'hash部分的链接（可用location.href.split('#')[0]获取,而且需要encodeURIComponent），因为页面一旦分享，微信客户端会在你的链接末尾加入其它参数，如果不是动态获取当前链接，将导致分享后的页面签名失败；
-- 图片大小限制为300*300， 格式jpg。
+- 所有参数必填的如`imgUrl` `link`，为空必定失败；
+
 
 `代码示例`
 
