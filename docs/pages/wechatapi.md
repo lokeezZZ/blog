@@ -10,7 +10,7 @@
 
 因此，在`hash`模式下，`react`通过 `constructor`中的`props.location.query`将获取不到`code`。`history`无需担心此问题。
 
-`示例代码`
+`代码示例`
 
 ``` js
 const {code} = props.location.query; // code:undefined
@@ -137,9 +137,10 @@ export function wxPay(param){
 
 **注意事项**
 - 先看一遍官方文档，这里只有官方文档没有提及的事项；
-- `onMenuShareTimeline` `onMenuShareAppMessage` `onMenuShareQQ` `onMenuShareQZone`，这四个接口已准备废弃，最好不要用；
+- `onMenuShareTimeline` `onMenuShareAppMessage` `onMenuShareQQ` `onMenuShareQZone`，这四个接口已准备废弃，最好不要使用；
 - 新接口不再取页面首张图片作为分享小图标；
-- 图片大小限制为`300*300`， 格式`jpg`；
+- 图片大小限制为`300 x 300 px`， 格式`jpg`；
+- 图片`imgUrl`应该是完整的`URL`,即**协议+域名+路径**
 - 配置是异步的，可多次进行配置分享数据，最好是提前配置；
 
 **分享失败的解决方案**

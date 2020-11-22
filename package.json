@@ -1,0 +1,28 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "memo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lvzitian/blog.git"
+  },
+  "keywords": [
+    "tian",
+    "lokee's",
+    "blog"
+  ],
+  "author": "lokee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lvzitian/blog/issues"
+  },
+  "homepage": "https://github.com/lvzitian/blog#readme",
+  "dependencies": {
+    "vuepress": "^1.4.0"
+  }
+}
