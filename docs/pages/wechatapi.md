@@ -1,8 +1,18 @@
+---
+title: 微信 Api 踩坑之路
+date: 2019-03-06
+categories:
+ - 前端
+tags:
+ - 第三方
+ - 微信
+publish: true
+---
 # 微信 Api 踩坑之路
 
 ## 微信授跳转
 
-关于授权步骤和一些参数说明可以看下[微信官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)，写的很清楚了;
+关于授权步骤和一些参数说明可以看下[微信官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)，写的很清楚了。
 
 **这里需要注意的是：**
 
@@ -31,7 +41,7 @@ const {code} = props.location.query; // code:undefined
 import wx from 'weixin-js-sdk';
 ```
 
-3. `ready` 之后操作`SDK`
+3. `ready` 之后操作`SDK`；
 - `ready` 是异步，使用` promise `更佳；
 - 没有在`ready`状态下调用`api`会提示无权限；
 - 注意后端返回字段的大小写 如 `appId`  `nonceStr`；
@@ -43,7 +53,7 @@ import wx from 'weixin-js-sdk';
 - 签名算法需正确，可通过`http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign` 页面工具进行校验；
 -  `appId`需一致；
 - 参数大小写是否正确；
-- 在`wx.config`完成后再操作URL重定向；
+- 在`wx.config`完成后再操作URL重定向。
 
 **以上都没问题就是后端问题**
 
@@ -204,13 +214,13 @@ wx.hideMenuItems({
     })
 ```
 
-微信没有提供这个按钮对应的KEY，所以需要通过 `wx.hideAllNonBaseMenuItem` 来隐藏所有`传播类`和`保护类`按钮
+微信没有提供这个按钮对应的KEY，所以需要通过 `wx.hideAllNonBaseMenuItem` 来隐藏所有`传播类`和`保护类`按钮。
 
 ``` js
 wx.hideAllNonBaseMenuItem(); //隐藏所有非基础类的按钮
 ```
 
-再通过`showMenuItems`来显示需要显示的按钮
+再通过`showMenuItems`来显示需要显示的按钮。
 
 ``` js
 wx.showMenuItems({

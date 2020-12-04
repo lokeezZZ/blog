@@ -1,4 +1,17 @@
-
+---
+title: memo
+date: 2018-12-08
+sidebar: 'auto'
+categories:
+ - 前端
+ - 工程化
+tags:
+ - 性能
+ - 基础
+keys:
+ - '834e8bc4d74592e3b999100c157215f5'
+publish: true
+---
 # 常用的 Markdown 样例
 [更多样例](https://vuepress.vuejs.org/zh/guide/markdown.html)
 
@@ -57,7 +70,6 @@ console.log('你好，威富通快速开发平台！')
 ```
 
 ### 6.图片
-![威富通](./swiftpass.png)
 ```
 ![威富通](./swiftpass.png)
 ```
